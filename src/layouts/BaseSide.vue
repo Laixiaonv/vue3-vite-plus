@@ -2,9 +2,15 @@
   <el-menu
     default-active="2"
     class="el-menu-vertical-demo"
-    :collapse="isCollapse"
+    :class="{'sidebar-open': menu?.sidebar?.opened }"
+    :collapse="!props?.isCollapse"
+    active-text-color="#2c75dd"
+    text-color="#fff"
+    background-color="#072f68"
     @open="handleOpen"
     @close="handleClose"
+    :collapse-transition = "false"
+    mode="vertical"
   >
     <el-sub-menu index="1">
       <template #title>
@@ -48,7 +54,16 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 
+const props = withDefaults(
+  defineProps<{ 
+    isCollapse: boolean 
+  }>(),{
+    isCollapse: false
+  }
+)
 const isCollapse = ref(true)
+console.log('isCollapse', props.isCollapse, isCollapse)
+
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -57,9 +72,19 @@ const handleClose = (key: string, keyPath: string[]) => {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .el-menu-vertical-demo {
     height: 100%;
+    width: 64px ;
+    transition: width .28s ease-in-out;
+    background-color: #072f68;
+    // &.el-menu--collapse {
+    //   width: 64px !important
+    // }
+    &:not(.el-menu--collapse){
+      width: 250px;			//宽度自己掌握
+      height: 100%;
+    }
   }
 </style>
 

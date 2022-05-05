@@ -2,10 +2,12 @@
   <div class="layout-container">
     <div class="app-wrapper__title">
       <img :src="projectInfo.logo" class="sidebar-logo">
-      <span class="sidebar-title">{{ projectInfo.title }}</span>
+      <span class="sidebar-title">{{ projectInfo?.title }}</span>
     </div>
     <div class="layout-wrap">
-      <BaseSide />
+      <div class="sidebar-wrap" :class="{'sidebar-open': menu?.sidebar?.opened }">
+       <BaseSide :isCollapse="menu?.sidebar?.opened"/>
+      </div>
       <div class="layout-main">
         <BaseHeader />
         <router-view />
@@ -18,12 +20,15 @@
 import BaseHeader from './BaseHeader.vue'
 import BaseSide from './BaseSide.vue'
 import Logo from '@/assets/images/logo.png'
+import { ref } from '@vue/runtime-core'
+import { useStore } from "vuex";
 
 const projectInfo = {
   title: '绿城服务·非住宅数据统计平台',
   logo: Logo
 }
 
+const { state: { menu } } = useStore();
 
 </script>
 <style  lang="scss" scoped>
@@ -41,6 +46,13 @@ const projectInfo = {
   .layout-main {
     flex: 1
   }
+}
+
+.sidebar-wrap {
+  height: 100%;
+  overflow: hidden;
+  transition: width .28s;
+  background-color: #072f68;
 }
 
 .app-wrapper {
