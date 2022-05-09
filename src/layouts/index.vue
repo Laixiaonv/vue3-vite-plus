@@ -6,7 +6,7 @@
     </div>
     <div class="layout-wrap">
       <div class="sidebar-wrap" :class="{'sidebar-open': menu?.sidebar?.opened }">
-       <BaseSide :isCollapse="menu?.sidebar?.opened"/>
+       <BaseSide />
       </div>
       <div class="layout-main">
         <BaseHeader />
@@ -52,7 +52,7 @@ const { state: { menu } } = useStore();
   height: 100%;
   overflow: hidden;
   transition: width .28s;
-  background-color: #072f68;
+  // background-color: #072f68;
 }
 
 .app-wrapper {

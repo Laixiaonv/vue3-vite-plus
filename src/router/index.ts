@@ -3,6 +3,10 @@ import layout from "@layouts/index.vue"
 const history = createWebHistory()
 const routes: Array<RouteRecordRaw> = [
   {
+    path: "/login",
+    component: () => import("../views/login.vue"),
+  },
+  {
     path: "/",
     redirect: "/home",
     component: layout,

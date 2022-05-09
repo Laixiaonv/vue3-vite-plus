@@ -1,9 +1,8 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver, NaiveUiResolver  } from 'unplugin-vue-components/resolvers'
 
 const pathSrc = path.resolve(__dirname, 'src')
 
@@ -16,6 +15,7 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "src/assets"),
       "@comps": path.resolve(__dirname, "src/components"),
       "@layouts": path.resolve(__dirname, "src/layouts"),
+      "@api": path.resolve(__dirname, "src/api"),
     },
   },
   css: {
@@ -36,6 +36,7 @@ export default defineConfig({
         ElementPlusResolver({
           importStyle: 'sass',
         }),
+        NaiveUiResolver()
       ],
       dts: 'src/components.d.ts',
     }),
